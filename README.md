@@ -1,13 +1,9 @@
-# Social Neurocognition
+# Experimental Study of Human Interaction
 
 ### Course Overview
-This course will provide a thorough background in the newly emerging field of social cognitive neuroscience. A broad range of social phenomena will be examined at multiple levels. First, at the social level including experience and behaviors. Second, at the cognitive level which deals with information processing systems. And lastly, at the neural level which deals with brain/neuronal bases of the first two levels. Topics include joint action, animal and human communication, and altered social functioning in neurological and psychiatric disorders. These topics will be discussed at both general and specific (article) levels.
+A deep understanding of any social species requires understanding why and how brains interact. Paradoxically, social neuroscience has focused nearly exclusively on mapping the brain as if it evolved in isolation. This focus on the individual brain is understandable as serious methodological constraints have traditionally limited multi-brain, interactive paradigms. Making headway on how brains interact, however, is becoming increasingly tractable. This course highlights scientific and technological innovations advancing our understanding of how human minds meet during social interaction. Conceptual and methodological challenges of studying human interaction are dealt with in-class discussions, laboratories, and small group research projects on selected topics.
 
-![alt text](./images/chimpchess.jpg?raw=true)
+![alt text](./images/xxx.jpg?raw=true)
 
-### Course Learning Goals
--	Gain insight into how humans became such big-brained, other-regarding apes
--	Gain insight into how human brains developmentally construct and pathologically lose an understanding of mind
--	Gain insight into how human brains achieve mutual understanding and how this elusive capacity underpins social interaction, culture, and society
--	Get a thorough background in neuroscientific approaches for advancing our understanding of human social phenomena  
--	Learn how to critically read the neuroscientific literature and view opposing theories and data in perspective
+### Course Goal and Objectives
+Insight into how human brains work in their most ubiquitous and biologically meaningful context, social interaction, has remained largely elusive, hence representing the “dark matter” of social neuroscience. This course ventures into this largely unexplored territory, pursuing the question of what constitutes a meeting of minds. Students will be expected to design, run, analyze, and write up an experiment answering a question of their choosing. Example research projects include but are not limited to studies of human interactive behavior in the real-world, the lab, simulated scenarios, or on social media.
