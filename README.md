@@ -8,5 +8,5 @@ Insight into how human brains work in their most ubiquitous and biologically mea
 ### Course Learning Goals
 -	Gain insight into the “dark matter” of social neuroscience
 -	Gain insight into how human brains achieve mutual understanding and how this elusive capacity underpins social interaction, culture, and society
--	Get a thorough background in scientific literature and approaches for advancing our understanding of human interaction
--	Learn how to design, run, analyze, and write up an experiment
+-	Get a thorough background in the scientific literature and approaches for advancing our understanding of human interaction
+-	Learn how to design, run, analyze, and write up an interaction study
