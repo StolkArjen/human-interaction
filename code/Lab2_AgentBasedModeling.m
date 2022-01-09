@@ -1,5 +1,3 @@
-
-
 %% Would you use "blue" or "circle"? (Frank & Goodman, 2012)
 % Lexicon, M, defining the relations between signals referents 
 % where rows represent the 4 possible signals: blue, green, circle, square 
@@ -22,13 +20,14 @@ L0 = M./sum(M,2) % probability distribution over referents given possible signal
 S1 = L0./sum(L0,1) % taking into account a literal listener
 S1_bluecircle = S1(:,2) % preferred signal(s) for referring to the blue circle
 
-% Confirm: Pragmatic listener, L1
+
+%% Which object are they referring to using the word "blue"? (Frank & Goodman, 2012)
+% Pragmatic listener, L1
 L1 = S1./sum(S1,2) % as L0, but taking into account a pragmatic speaker
-L1_circle = S1(3,:) % confirm most likely referent for circle
+L1_blue = L1(1,:) % most likely referent for blue (1st row)
 
 
 %% Whom is referred to with "red hair"? (Breakout session)
-
 % 1) Specify the lexicon (use the powerpoint slide)
 M = [        % red hair
              % tall one
@@ -38,4 +37,5 @@ M = [        % red hair
 L0 = "do something here";
 
 % 3) Compute a pragmatic listener's (L1) inference
+S1 = "do something here";
 L1 = "do something here";
