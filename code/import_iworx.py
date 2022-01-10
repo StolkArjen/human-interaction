@@ -1,5 +1,7 @@
-def import_iworx(filename):
-  """
+#!/usr/bin/env python
+
+"""
+--------------------------------------------------------
   IMPORT_IWORX reads and converts various IWORX datafiles into a 
   FieldTrip-type data structure.
 
@@ -8,10 +10,15 @@ def import_iworx(filename):
   where the filename should point to a .mat or .txt datafile.
   
   Copyright (C) 2022, Arjen Stolk
-  """
+  --------------------------------------------------------
+"""
 
+
+import os
+import scipy.io
+
+def import_iworx(filename):
   # check the input
-  import os
   path = os.path.split(filename)[0] # xxx/
   name = os.path.split(filename)[-1][:-4] # xxx
   ext  = os.path.splitext(filename)[-1] # .xxx
@@ -38,7 +45,6 @@ def import_iworx(filename):
     markerfile = os.path.join(path, name + '_MarksData.txt')
 
   # read the data
-  import scipy.io
   mat = scipy.io.loadmat(datafile)
 
   # initialize data structure
