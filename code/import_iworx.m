@@ -5,8 +5,9 @@ function [data, event] = import_iworx(filename)
 % preprocessing or other analysis methods implemented in Fieldtrip.
 %
 % Use as
-%   [data] = import_iworx(filename)
+%   [data, event] = import_iworx(filename)
 % where the filename should point to a .mat or .txt datafile.
+%
 % The output is a FieldTrip raw data structure as if it were returned
 % by FT_PREPROCESSING.
 %

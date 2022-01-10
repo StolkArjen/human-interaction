@@ -6,8 +6,18 @@
   FieldTrip-type data structure.
 
   Use as
-    [data] = import_iworx(filename)
+    data, event = import_iworx(filename)
   where the filename should point to a .mat or .txt datafile.
+
+  data has the following nested fields:
+    .trial
+    .time
+    .label
+
+  event has the following nested fields:
+    .type
+    .sample
+    .value
   
   Copyright (C) 2022, Arjen Stolk
   --------------------------------------------------------
