@@ -17,7 +17,7 @@ label     variable names
 event     onsets and durations of task events
 token     token positions
 
-Arjen Stolk, 2021
+Arjen Stolk, 2022
 --------------------------------------------------------
 """
 
@@ -116,42 +116,43 @@ def read_json_tcg(logfile):
                         if (val[0]['epoch'] == 'roleassignment' and (s == 'training' or s == 'game')) or \
                                 (val[0]['epoch'] == 'tokenassignment' and s == 'practice'):
                             TrialOnset = val[0]['timestamp']
-                            if 'angle' in val[0]['p1']:  # tcg
-                                if 'p1' in val[0] and 'role' in val[0]['p1'] and val[0]['p1']['role'] == 'sender':
-                                    SenderPlayer = 1
-                                    SenderTarget = [
-                                        val[0]['p1']['goal']['xPos'], val[0]['p1']['goal']['yPos'], val[0]['p1']['goal']['angle']]
-                                elif 'p2' in val[0] and 'role' in val[0]['p2'] and val[0]['p2']['role'] == 'sender':
-                                    SenderPlayer = 2
-                                    SenderTarget = [
-                                        val[0]['p2']['goal']['xPos'], val[0]['p2']['goal']['yPos'], val[0]['p2']['goal']['angle']]
-                                if 'p1' in val[0] and 'role' in val[0]['p1'] and val[0]['p1']['role'] == 'receiver':
-                                    ReceiverPlayer = 1
-                                    ReceiverTarget = [
-                                        val[0]['p1']['goal']['xPos'], val[0]['p1']['goal']['yPos'], val[0]['p1']['goal']['angle']]
-                                    ReceiverTargetPos = [
-                                        val[0]['p1']['goal']['xPos'], val[0]['p1']['goal']['yPos']]
-                                elif 'p2' in val[0] and 'role' in val[0]['p2'] and val[0]['p2']['role'] == 'receiver':
-                                    ReceiverPlayer = 2
-                                    ReceiverTarget = [
-                                        val[0]['p2']['goal']['xPos'], val[0]['p2']['goal']['yPos'], val[0]['p2']['goal']['angle']]
-                                    ReceiverTargetPos = [
-                                        val[0]['p2']['goal']['xPos'], val[0]['p2']['goal']['yPos']]
-                            else:  # tcg kids
-                                if 'p1' in val[0] and 'role' in val[0]['p1'] and val[0]['p1']['role'] == 'sender':
-                                    SenderPlayer = 1
-                                    SenderTarget = [0, 0]
-                                elif 'p2' in val[0] and 'role' in val[0]['p2'] and val[0]['p2']['role'] == 'sender':
-                                    SenderPlayer = 2
-                                    SenderTarget = [0, 0]
-                                if 'p1' in val[0] and 'role' in val[0]['p1'] and val[0]['p1']['role'] == 'receiver':
-                                    ReceiverPlayer = 1
-                                    ReceiverTarget = val[0]['p1']['goal']
-                                    ReceiverTargetPos = val[0]['p1']['goal']
-                                elif 'p2' in val[0] and 'role' in val[0]['p2'] and val[0]['p2']['role'] == 'receiver':
-                                    ReceiverPlayer = 2
-                                    ReceiverTarget = val[0]['p2']['goal']
-                                    ReceiverTargetPos = val[0]['p2']['goal']
+                            if 'p1' in val[0] or 'p2' in val[0]:
+                                if 'angle' in val[0]['p1']:  # tcg
+                                    if 'p1' in val[0] and 'role' in val[0]['p1'] and val[0]['p1']['role'] == 'sender':
+                                        SenderPlayer = 1
+                                        SenderTarget = [
+                                            val[0]['p1']['goal']['xPos'], val[0]['p1']['goal']['yPos'], val[0]['p1']['goal']['angle']]
+                                    elif 'p2' in val[0] and 'role' in val[0]['p2'] and val[0]['p2']['role'] == 'sender':
+                                        SenderPlayer = 2
+                                        SenderTarget = [
+                                            val[0]['p2']['goal']['xPos'], val[0]['p2']['goal']['yPos'], val[0]['p2']['goal']['angle']]
+                                    if 'p1' in val[0] and 'role' in val[0]['p1'] and val[0]['p1']['role'] == 'receiver':
+                                        ReceiverPlayer = 1
+                                        ReceiverTarget = [
+                                            val[0]['p1']['goal']['xPos'], val[0]['p1']['goal']['yPos'], val[0]['p1']['goal']['angle']]
+                                        ReceiverTargetPos = [
+                                            val[0]['p1']['goal']['xPos'], val[0]['p1']['goal']['yPos']]
+                                    elif 'p2' in val[0] and 'role' in val[0]['p2'] and val[0]['p2']['role'] == 'receiver':
+                                        ReceiverPlayer = 2
+                                        ReceiverTarget = [
+                                            val[0]['p2']['goal']['xPos'], val[0]['p2']['goal']['yPos'], val[0]['p2']['goal']['angle']]
+                                        ReceiverTargetPos = [
+                                            val[0]['p2']['goal']['xPos'], val[0]['p2']['goal']['yPos']]
+                                else:  # tcg kids
+                                    if 'p1' in val[0] and 'role' in val[0]['p1'] and val[0]['p1']['role'] == 'sender':
+                                        SenderPlayer = 1
+                                        SenderTarget = [0, 0]
+                                    elif 'p2' in val[0] and 'role' in val[0]['p2'] and val[0]['p2']['role'] == 'sender':
+                                        SenderPlayer = 2
+                                        SenderTarget = [0, 0]
+                                    if 'p1' in val[0] and 'role' in val[0]['p1'] and val[0]['p1']['role'] == 'receiver':
+                                        ReceiverPlayer = 1
+                                        ReceiverTarget = val[0]['p1']['goal']
+                                        ReceiverTargetPos = val[0]['p1']['goal']
+                                    elif 'p2' in val[0] and 'role' in val[0]['p2'] and val[0]['p2']['role'] == 'receiver':
+                                        ReceiverPlayer = 2
+                                        ReceiverTarget = val[0]['p2']['goal']
+                                        ReceiverTargetPos = val[0]['p2']['goal']
                             # player IDs (for relating to userinput)
                             for v in val:
                                 if 'Iamplayer' in v:
@@ -199,7 +200,7 @@ def read_json_tcg(logfile):
                                             v['action'] == 'rotateleft' or v['action'] == 'rotateright':
                                         SenderNumMoves = SenderNumMoves + 1
                                         # tcg kids
-                                        if SenderNumMoves == 1 and v['token']['shape'].isalpha():
+                                        if SenderNumMoves == 1 and str(v['token']['shape']).isalpha():
                                             SenderMovOnset = v['timestamp']
                                             SenderPlanTime = SenderMovOnset - \
                                                 val[0]['timestamp']  # 1st timestamp is goal onset
@@ -214,11 +215,11 @@ def read_json_tcg(logfile):
                                                 v['timestamp'] - val[index-1]['timestamp'])
                                         # on target
                                         # tcg
-                                        if v['token']['shape'].isnumeric() and [v['token']['xPos'], v['token']['yPos']] == ReceiverTargetPos:
+                                        if str(v['token']['shape']).isnumeric() and [v['token']['xPos'], v['token']['yPos']] == ReceiverTargetPos:
                                             TargetNum = TargetNum + 1
                                             WaitForOffTarget = 1
                                         # tcg kids
-                                        elif v['token']['shape'].isalpha() and check_target(v['token']):
+                                        elif str(v['token']['shape']).isalpha() and check_target(v['token']):
                                             TargetNum = TargetNum + 1
                                             WaitForOffTarget = 1
                                         # double check on target
@@ -252,7 +253,7 @@ def read_json_tcg(logfile):
                                             v['action'] == 'tracking':
                                         ReceiverNumMoves = ReceiverNumMoves + 1
                                         # tcg kids
-                                        if ReceiverNumMoves == 1 and v['token']['shape'].isalpha():
+                                        if ReceiverNumMoves == 1 and str(v['token']['shape']).isalpha():
                                             ReceiverMovOnset = v['timestamp']
                                             ReceiverPlanTime = ReceiverMovOnset - \
                                                 val[0]['timestamp']  # 1st timestamp is goal onset
