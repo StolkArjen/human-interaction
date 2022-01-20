@@ -1,0 +1,155 @@
+[{
+    "epoch": "feedback",
+    "trial": 16,
+    "success": true,
+    "level": 2,
+    "p1": {
+        "player": 1,
+        "time": 10000,
+        "color": [
+            49,
+            113,
+            166,
+            1
+        ],
+        "role": "receiver",
+        "shape": 1,
+        "xPos": -1,
+        "yPos": 1,
+        "angle": 0,
+        "state": "in-use",
+        "goal": {
+            "shape": 1,
+            "xPos": -1,
+            "yPos": 1,
+            "angle": 0
+        },
+        "onTarget": 0,
+        "numTarget": 0,
+        "numMove": 3,
+        "control": "keyboard",
+        "timeout": 1999
+    },
+    "p2": {
+        "player": 2,
+        "time": 10000,
+        "color": [
+            223,
+            129,
+            51,
+            1
+        ],
+        "role": "sender",
+        "shape": 3,
+        "xPos": 1,
+        "yPos": -1,
+        "angle": 270,
+        "state": "locked",
+        "goal": {
+            "shape": 3,
+            "xPos": 1,
+            "yPos": -1,
+            "angle": 270
+        },
+        "onTarget": 0,
+        "numTarget": 2,
+        "numMove": 13,
+        "control": "keyboard",
+        "timeout": 1859
+    },
+    "player": "205806239.82969737",
+    "stage": {
+        "stage": 2,
+        "step": 5,
+        "round": 16
+    },
+    "timestamp": 1601862733580
+}, {
+    "epoch": "feedback",
+    "trial": 16,
+    "success": true,
+    "level": 2,
+    "p1": {
+        "player": 1,
+        "time": 10000,
+        "color": [
+            49,
+            113,
+            166,
+            1
+        ],
+        "role": "receiver",
+        "shape": 1,
+        "xPos": -1,
+        "yPos": 1,
+        "angle": 0,
+        "state": "locked",
+        "goal": {
+            "shape": 1,
+            "xPos": -1,
+            "yPos": 1,
+            "angle": 0
+        },
+        "onTarget": 0,
+        "numTarget": 0,
+        "numMove": 3,
+        "control": "keyboard",
+        "timeout": 1999
+    },
+    "p2": {
+        "player": 2,
+        "time": 10000,
+        "color": [
+            223,
+            129,
+            51,
+            1
+        ],
+        "role": "sender",
+        "shape": 3,
+        "xPos": 1,
+        "yPos": -1,
+        "angle": 270,
+        "state": "locked",
+        "goal": {
+            "shape": 3,
+            "xPos": 1,
+            "yPos": -1,
+            "angle": 270
+        },
+        "onTarget": 0,
+        "numTarget": 2,
+        "numMove": 13,
+        "control": "keyboard",
+        "timeout": 1859
+    },
+    "player": "258683973.03409752",
+    "stage": {
+        "stage": 2,
+        "step": 5,
+        "round": 16
+    },
+    "timestamp": 1601862733589
+}, {
+    "time": 2030,
+    "timeup": true,
+    "done": true,
+    "player": "205806239.82969737",
+    "stage": {
+        "stage": 2,
+        "step": 5,
+        "round": 16
+    },
+    "timestamp": 1601862735575
+}, {
+    "time": 2031,
+    "timeup": true,
+    "done": true,
+    "player": "258683973.03409752",
+    "stage": {
+        "stage": 2,
+        "step": 5,
+        "round": 16
+    },
+    "timestamp": 1601862735585
+}]

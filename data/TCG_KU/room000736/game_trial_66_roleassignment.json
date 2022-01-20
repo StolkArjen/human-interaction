@@ -1,0 +1,171 @@
+[{
+    "epoch": "roleassignment",
+    "trial": 66,
+    "p1": {
+        "player": 1,
+        "time": 10000,
+        "color": [
+            49,
+            113,
+            166,
+            1
+        ],
+        "role": "receiver",
+        "shape": 3,
+        "xPos": 1,
+        "yPos": -1,
+        "angle": 180,
+        "state": "outside",
+        "goal": {
+            "shape": 3,
+            "xPos": 1,
+            "yPos": -1,
+            "angle": 180
+        },
+        "onTarget": 0,
+        "numTarget": 0,
+        "numMove": 0,
+        "control": [],
+        "timeout": []
+    },
+    "p2": {
+        "player": 2,
+        "time": 10000,
+        "color": [
+            223,
+            129,
+            51,
+            1
+        ],
+        "role": "sender",
+        "shape": 3,
+        "xPos": -1,
+        "yPos": 0,
+        "angle": 0,
+        "state": "outside",
+        "goal": {
+            "shape": 3,
+            "xPos": -1,
+            "yPos": 0,
+            "angle": 0
+        },
+        "onTarget": 0,
+        "numTarget": 0,
+        "numMove": 0,
+        "control": [],
+        "timeout": []
+    },
+    "player": "290564947.51179576",
+    "stage": {
+        "stage": 3,
+        "step": 1,
+        "round": 66
+    },
+    "timestamp": 1601579671072
+}, {
+    "epoch": "roleassignment",
+    "trial": 66,
+    "p1": {
+        "player": 1,
+        "time": 10000,
+        "color": [
+            49,
+            113,
+            166,
+            1
+        ],
+        "role": "receiver",
+        "shape": 3,
+        "xPos": 1,
+        "yPos": -1,
+        "angle": 180,
+        "state": "outside",
+        "goal": {
+            "shape": 3,
+            "xPos": 1,
+            "yPos": -1,
+            "angle": 180
+        },
+        "onTarget": 0,
+        "numTarget": 0,
+        "numMove": 0,
+        "control": [],
+        "timeout": []
+    },
+    "p2": {
+        "player": 2,
+        "time": 10000,
+        "color": [
+            223,
+            129,
+            51,
+            1
+        ],
+        "role": "sender",
+        "shape": 3,
+        "xPos": -1,
+        "yPos": 0,
+        "angle": 0,
+        "state": "outside",
+        "goal": {
+            "shape": 3,
+            "xPos": -1,
+            "yPos": 0,
+            "angle": 0
+        },
+        "onTarget": 0,
+        "numTarget": 0,
+        "numMove": 0,
+        "control": [],
+        "timeout": []
+    },
+    "player": "785454281.7377042",
+    "stage": {
+        "stage": 3,
+        "step": 1,
+        "round": 66
+    },
+    "timestamp": 1601579671202
+}, {
+    "Iamplayer": 2,
+    "date": "2020-10-01T19:14:31.393Z",
+    "player": "290564947.51179576",
+    "stage": {
+        "stage": 3,
+        "step": 1,
+        "round": 66
+    },
+    "timestamp": 1601579671445
+}, {
+    "Iamplayer": 1,
+    "date": "2020-10-01T19:14:32.391Z",
+    "player": "785454281.7377042",
+    "stage": {
+        "stage": 3,
+        "step": 1,
+        "round": 66
+    },
+    "timestamp": 1601579672458
+}, {
+    "time": 1502,
+    "timeup": true,
+    "done": true,
+    "player": "290564947.51179576",
+    "stage": {
+        "stage": 3,
+        "step": 1,
+        "round": 66
+    },
+    "timestamp": 1601579672948
+}, {
+    "time": 1578,
+    "timeup": true,
+    "done": true,
+    "player": "785454281.7377042",
+    "stage": {
+        "stage": 3,
+        "step": 1,
+        "round": 66
+    },
+    "timestamp": 1601579674038
+}]
