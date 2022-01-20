@@ -1,0 +1,191 @@
+[{
+    "epoch": "receiver",
+    "trial": 28,
+    "player": "602198973.0712578",
+    "stage": {
+        "stage": 3,
+        "step": 4,
+        "round": 28
+    },
+    "timestamp": 1642708196855,
+    "session": "room000165"
+}, {
+    "epoch": "receiver",
+    "trial": 28,
+    "player": "526014428.59222347",
+    "stage": {
+        "stage": 3,
+        "step": 4,
+        "round": 28
+    },
+    "timestamp": 1642708196858,
+    "session": "room000165"
+}, {
+    "token": {
+        "player": 1,
+        "time": 10000,
+        "color": [
+            49,
+            113,
+            166,
+            1
+        ],
+        "role": "receiver",
+        "shape": 1,
+        "xPos": 0,
+        "yPos": 0,
+        "angle": 0,
+        "state": "in-use",
+        "goal": {
+            "shape": 1,
+            "xPos": -1,
+            "yPos": 0,
+            "angle": 90
+        },
+        "onTarget": 0,
+        "numTarget": 0,
+        "numMove": 1,
+        "control": "keyboard",
+        "timeout": 5083
+    },
+    "action": "start",
+    "player": "526014428.59222347",
+    "stage": {
+        "stage": 3,
+        "step": 4,
+        "round": 28
+    },
+    "timestamp": 1642708197942,
+    "session": "room000165"
+}, {
+    "token": {
+        "player": 1,
+        "time": 10000,
+        "color": [
+            49,
+            113,
+            166,
+            1
+        ],
+        "role": "receiver",
+        "shape": 1,
+        "xPos": -1,
+        "yPos": 0,
+        "angle": 0,
+        "state": "in-use",
+        "goal": {
+            "shape": 1,
+            "xPos": -1,
+            "yPos": 0,
+            "angle": 90
+        },
+        "onTarget": 0,
+        "numTarget": 0,
+        "numMove": 2,
+        "control": "keyboard",
+        "timeout": 5083
+    },
+    "action": "left",
+    "player": "526014428.59222347",
+    "stage": {
+        "stage": 3,
+        "step": 4,
+        "round": 28
+    },
+    "timestamp": 1642708198348,
+    "session": "room000165"
+}, {
+    "token": {
+        "player": 1,
+        "time": 10000,
+        "color": [
+            49,
+            113,
+            166,
+            1
+        ],
+        "role": "receiver",
+        "shape": 1,
+        "xPos": -1,
+        "yPos": 0,
+        "angle": 270,
+        "state": "in-use",
+        "goal": {
+            "shape": 1,
+            "xPos": -1,
+            "yPos": 0,
+            "angle": 90
+        },
+        "onTarget": 0,
+        "numTarget": 0,
+        "numMove": 3,
+        "control": "keyboard",
+        "timeout": 5083
+    },
+    "action": "rotateleft",
+    "player": "526014428.59222347",
+    "stage": {
+        "stage": 3,
+        "step": 4,
+        "round": 28
+    },
+    "timestamp": 1642708198629,
+    "session": "room000165"
+}, {
+    "token": {
+        "player": 1,
+        "time": 10000,
+        "color": [
+            49,
+            113,
+            166,
+            1
+        ],
+        "role": "receiver",
+        "shape": 1,
+        "xPos": -1,
+        "yPos": 0,
+        "angle": 270,
+        "state": "locked",
+        "goal": {
+            "shape": 1,
+            "xPos": -1,
+            "yPos": 0,
+            "angle": 90
+        },
+        "onTarget": 0,
+        "numTarget": 0,
+        "numMove": 3,
+        "control": "keyboard",
+        "timeout": 5083
+    },
+    "action": "stop",
+    "time": 2070,
+    "timeup": true,
+    "role": "RECEIVER",
+    "partner": "602198973.0712578",
+    "done": true,
+    "player": "526014428.59222347",
+    "stage": {
+        "stage": 3,
+        "step": 4,
+        "round": 28
+    },
+    "timestamp": 1642708198931,
+    "session": "room000165"
+}, {
+    "receiver end (says sender)": true,
+    "time": 2085,
+    "timeup": true,
+    "role": "SENDER",
+    "partner": "526014428.59222347",
+    "done": true,
+    "player": "602198973.0712578",
+    "stage": {
+        "stage": 3,
+        "step": 4,
+        "round": 28
+    },
+    "timestamp": 1642708198939,
+    "session": "room000165"
+}]
