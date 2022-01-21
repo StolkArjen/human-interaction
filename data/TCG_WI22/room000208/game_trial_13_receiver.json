@@ -1,0 +1,265 @@
+[{
+    "epoch": "receiver",
+    "trial": 13,
+    "player": "148244013.46880388",
+    "stage": {
+        "stage": 3,
+        "step": 4,
+        "round": 13
+    },
+    "timestamp": 1642732051666,
+    "session": "room000208"
+}, {
+    "epoch": "receiver",
+    "trial": 13,
+    "player": "690719497.2432109",
+    "stage": {
+        "stage": 3,
+        "step": 4,
+        "round": 13
+    },
+    "timestamp": 1642732051695,
+    "session": "room000208"
+}, {
+    "token": {
+        "player": 2,
+        "time": 10000,
+        "color": [
+            223,
+            129,
+            51,
+            1
+        ],
+        "role": "receiver",
+        "shape": 3,
+        "xPos": 0,
+        "yPos": 0,
+        "angle": 0,
+        "state": "in-use",
+        "goal": {
+            "shape": 3,
+            "xPos": -1,
+            "yPos": 1,
+            "angle": 180
+        },
+        "onTarget": 0,
+        "numTarget": 0,
+        "numMove": 1,
+        "control": "keyboard",
+        "timeout": 2557
+    },
+    "action": "start",
+    "player": "148244013.46880388",
+    "stage": {
+        "stage": 3,
+        "step": 4,
+        "round": 13
+    },
+    "timestamp": 1642732052541,
+    "session": "room000208"
+}, {
+    "token": {
+        "player": 2,
+        "time": 10000,
+        "color": [
+            223,
+            129,
+            51,
+            1
+        ],
+        "role": "receiver",
+        "shape": 3,
+        "xPos": -1,
+        "yPos": 0,
+        "angle": 0,
+        "state": "in-use",
+        "goal": {
+            "shape": 3,
+            "xPos": -1,
+            "yPos": 1,
+            "angle": 180
+        },
+        "onTarget": 0,
+        "numTarget": 0,
+        "numMove": 2,
+        "control": "keyboard",
+        "timeout": 2557
+    },
+    "action": "left",
+    "player": "148244013.46880388",
+    "stage": {
+        "stage": 3,
+        "step": 4,
+        "round": 13
+    },
+    "timestamp": 1642732052861,
+    "session": "room000208"
+}, {
+    "token": {
+        "player": 2,
+        "time": 10000,
+        "color": [
+            223,
+            129,
+            51,
+            1
+        ],
+        "role": "receiver",
+        "shape": 3,
+        "xPos": -1,
+        "yPos": 1,
+        "angle": 0,
+        "state": "in-use",
+        "goal": {
+            "shape": 3,
+            "xPos": -1,
+            "yPos": 1,
+            "angle": 180
+        },
+        "onTarget": 0,
+        "numTarget": 0,
+        "numMove": 3,
+        "control": "keyboard",
+        "timeout": 2557
+    },
+    "action": "up",
+    "player": "148244013.46880388",
+    "stage": {
+        "stage": 3,
+        "step": 4,
+        "round": 13
+    },
+    "timestamp": 1642732053180,
+    "session": "room000208"
+}, {
+    "token": {
+        "player": 2,
+        "time": 10000,
+        "color": [
+            223,
+            129,
+            51,
+            1
+        ],
+        "role": "receiver",
+        "shape": 3,
+        "xPos": -1,
+        "yPos": 1,
+        "angle": 90,
+        "state": "in-use",
+        "goal": {
+            "shape": 3,
+            "xPos": -1,
+            "yPos": 1,
+            "angle": 180
+        },
+        "onTarget": 0,
+        "numTarget": 0,
+        "numMove": 4,
+        "control": "keyboard",
+        "timeout": 2557
+    },
+    "action": "rotateright",
+    "player": "148244013.46880388",
+    "stage": {
+        "stage": 3,
+        "step": 4,
+        "round": 13
+    },
+    "timestamp": 1642732054350,
+    "session": "room000208"
+}, {
+    "token": {
+        "player": 2,
+        "time": 10000,
+        "color": [
+            223,
+            129,
+            51,
+            1
+        ],
+        "role": "receiver",
+        "shape": 3,
+        "xPos": -1,
+        "yPos": 1,
+        "angle": 180,
+        "state": "in-use",
+        "goal": {
+            "shape": 3,
+            "xPos": -1,
+            "yPos": 1,
+            "angle": 180
+        },
+        "onTarget": 0,
+        "numTarget": 0,
+        "numMove": 5,
+        "control": "keyboard",
+        "timeout": 2557
+    },
+    "action": "rotateright",
+    "player": "148244013.46880388",
+    "stage": {
+        "stage": 3,
+        "step": 4,
+        "round": 13
+    },
+    "timestamp": 1642732054507,
+    "session": "room000208"
+}, {
+    "token": {
+        "player": 2,
+        "time": 10000,
+        "color": [
+            223,
+            129,
+            51,
+            1
+        ],
+        "role": "receiver",
+        "shape": 3,
+        "xPos": -1,
+        "yPos": 1,
+        "angle": 180,
+        "state": "locked",
+        "goal": {
+            "shape": 3,
+            "xPos": -1,
+            "yPos": 1,
+            "angle": 180
+        },
+        "onTarget": 0,
+        "numTarget": 0,
+        "numMove": 5,
+        "control": "keyboard",
+        "timeout": 2557
+    },
+    "action": "stop",
+    "time": 3632,
+    "timeup": true,
+    "role": "RECEIVER",
+    "partner": "690719497.2432109",
+    "done": true,
+    "player": "148244013.46880388",
+    "stage": {
+        "stage": 3,
+        "step": 4,
+        "round": 13
+    },
+    "timestamp": 1642732055304,
+    "session": "room000208"
+}, {
+    "receiver end (says sender)": true,
+    "time": 3662,
+    "timeup": true,
+    "role": "SENDER",
+    "partner": "148244013.46880388",
+    "done": true,
+    "player": "690719497.2432109",
+    "stage": {
+        "stage": 3,
+        "step": 4,
+        "round": 13
+    },
+    "timestamp": 1642732055329,
+    "session": "room000208"
+}]
