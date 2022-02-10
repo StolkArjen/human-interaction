@@ -2,11 +2,11 @@
 
 """
 --------------------------------------------------------
-  IMPORT_IWORX reads and converts various IWORX datafiles
+  READ_IWORX reads and converts various IWORX datafiles
   into a FieldTrip-type data structure
 
   Use as
-    data, event = import_iworx(folder)
+    data, event = read_iworx(folder)
   where folder contains a data (.mat) and a marks (.txt) file
 
   data has the following nested fields:
@@ -28,7 +28,7 @@ import os
 import glob
 import scipy.io
 
-def import_iworx(folder):
+def read_iworx(folder):
 
     # check the input
     matfile = glob.glob(os.path.join(folder, "*.mat"))[0]

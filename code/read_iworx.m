@@ -1,11 +1,11 @@
-function [data, event] = import_iworx(folder)
+function [data, event] = read_iworx(folder)
 
-% IMPORT_IWORX reads and converts various IWORX datafiles into a
+% READ_IWORX reads and converts various IWORX datafiles into a
 % FieldTrip-type data structure, which subsequently can be used for
 % preprocessing or other analysis methods implemented in Fieldtrip
 %
 % Use as
-%   [data, event] = import_iworx(folder)
+%   [data, event] = read_iworx(folder)
 % where folder contains a data (.mat) and a marks (.txt) file
 %
 % data has the following nested fields:
