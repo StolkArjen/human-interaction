@@ -1,68 +1,58 @@
-function [data, event] = import_iworx(filename)
+function [data, event] = import_iworx(folder)
 
-% IMPORT_IWORX reads and converts various IWORX datafiles into a 
-% FieldTrip-type data structure, which subsequently can be used for 
-% preprocessing or other analysis methods implemented in Fieldtrip.
+% IMPORT_IWORX reads and converts various IWORX datafiles into a
+% FieldTrip-type data structure, which subsequently can be used for
+% preprocessing or other analysis methods implemented in Fieldtrip
 %
 % Use as
-%   [data, event] = import_iworx(filename)
-% where the filename should point to a .mat or .txt datafile.
+%   [data, event] = import_iworx(folder)
+% where folder contains a data (.mat) and a marks (.txt) file
 %
-% The output is a FieldTrip raw data structure as if it were returned
-% by FT_PREPROCESSING.
+% data has the following nested fields:
+%    .trial
+%    .time
+%    .label
+%
+%  event has the following nested fields:
+%    .type
+%    .sample
+%    .value
 %
 % Copyright (C) 2022, Arjen Stolk
 
 
 % check the input
-[filepath,name,ext] = fileparts(filename);
-if ~strcmp(ext, '.mat') && ~strcmp(ext, '.txt')
-  error('file extension should be either .mat or .txt for this function')
-end
+matfile = dir([folder filesep '*.mat']);
 hasmat = 0;
-if strcmp(ext, '.mat')
+if ~isempty(matfile)
   hasmat = 1;
 end
-hastxt = 0;
+markfile = dir([folder filesep '*.txt']);
 hasmark = 0;
-if strcmp(ext, '.txt')
-  hastxt = 1;
-  if strcmp(name(end-9:end), '_MarksData')
-    hasmark = 1;
-  end
-end
-
-% organize the input
-if hasmark
-  datafile   = [filepath filesep name(1:end-10) '.mat'];
-  headerfile = [filepath filesep name(1:end-10) '.txt'];
-  markerfile = filename; 
-elseif hastxt || hasmat
-  datafile   = [filepath filesep name '.mat'];
-  headerfile = [filepath filesep name '.txt'];
-  markerfile = [filepath filesep name '_MarksData.txt']; 
+if ~isempty(markfile)
+  hasmark = 1;
 end
 
 % read the data
-load(datafile);
-for t = 1:n % n is a variable contained by the mat file
-  data.trial{1,t} = eval(['b' num2str(t)])';
-  data.time{1,t} = eval(['b' num2str(t) '(:,1)'])';
-end
-
-% read the header information
-try
-  fid = fopen(headerfile,'r');
-  str = textscan(fid,'%s','Delimiter','\r');
-  str = str{1};
-  fclose(fid);
-  data.label = split(str{1}, '	');
+data = [];
+if hasmat
+  load([folder filesep matfile(1).name]);
+  for t = 1:n % n is a variable contained by the mat file
+    data.trial{1,t} = eval(['b' num2str(t)])';
+    data.time{1,t} = eval(['b' num2str(t) '(:,1)'])';
+  end
+  data.label = {'Time'; ...
+    'Corrugator supercilii muscle'; ...
+    'Zygomaticus major muscle';	...
+    'Heart Rate';	...
+    'dunno'; ...
+    'Skin Conductance'};
 end
 
 % read the markers
 event = [];
-try
-  fid = fopen(markerfile,'r');
+if hasmark
+  fid = fopen([folder filesep markfile(1).name],'r');
   str = textscan(fid,'%s','Delimiter','\r');
   str = str{1};
   fclose(fid);
