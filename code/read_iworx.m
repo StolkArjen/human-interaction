@@ -1,12 +1,12 @@
-function [data, event] = read_iworx(folder)
+function [data, event] = read_iworx(filename)
 
 % READ_IWORX reads and converts various IWORX datafiles into a
 % FieldTrip-type data structure, which subsequently can be used for
 % preprocessing or other analysis methods implemented in Fieldtrip
 %
 % Use as
-%   [data, event] = read_iworx(folder)
-% where folder contains a data (.mat) and a marks (.txt) file
+%   [data, event] = read_iworx(filename)
+% where filename has a .mat extension
 %
 % data has the following nested fields:
 %    .trial
@@ -22,44 +22,42 @@ function [data, event] = read_iworx(folder)
 
 
 % check the input
-matfile = dir([folder filesep '*.mat']);
-hasmat = 0;
-if ~isempty(matfile)
-  hasmat = 1;
-end
-markfile = dir([folder filesep '*.txt']);
-hasmark = 0;
-if ~isempty(markfile)
-  hasmark = 1;
+[~, ~, ext] = fileparts(filename);
+if ~strcmp(ext, '.mat')
+  error('this function requires a .mat file as input')
 end
 
 % read the data
-data = [];
-if hasmat
-  load([folder filesep matfile(1).name]);
-  for t = 1:n % n is a variable contained by the mat file
-    data.trial{1,t} = eval(['b' num2str(t)])';
-    data.time{1,t} = eval(['b' num2str(t) '(:,1)'])';
-  end
-  data.label = {'Time'; ...
-    'Corrugator supercilii muscle'; ...
-    'Zygomaticus major muscle';	...
-    'Heart Rate';	...
-    'dunno'; ...
-    'Skin Conductance'};
+load(filename);
+for t = 1:n % n is a variable contained by the mat file
+  data.trial{1,t} = eval(['b' num2str(t)])';
+  data.time{1,t} = eval(['b' num2str(t) '(:,1)'])';
 end
+data.label = {'Time'; ...
+  'Corrugator supercilii muscle'; ...
+  'Zygomaticus major muscle';	...
+  'Heart Rate';	...
+  'dunno'; ...
+  'Skin Conductance'}; % info stored in the .txt but not .mat file
 
 % read the markers
 event = [];
-if hasmark
-  fid = fopen([folder filesep markfile(1).name],'r');
-  str = textscan(fid,'%s','Delimiter','\r');
-  str = str{1};
-  fclose(fid);
-  markers = split(str, '	');
-  for e = 2:size(markers,1)
-    event(end+1).type   = markers{e,1};
-    event(end).sample = str2num(markers{e,2});
-    event(end).value  = str2num(markers{e,5});
+marks = whos('m*');
+if ~isempty(marks)
+  for e = 1:numel(marks)
+    tmp = eval(marks(e).name);
+    event(end+1).type = 'trig';
+    event(end).sample = tmp.time;
+    event(end).value  = tmp.value;
   end
+
+  % discard trials unlikely to match the events
+  for t = 1:size(data.trial,2)
+    if data.time{1,t}(end) < event(end).sample
+      data.trial{1,t} = [];
+      data.time{1,t} = [];
+    end
+  end
+  data.trial = data.trial(~cellfun('isempty', data.trial));
+  data.time = data.time(~cellfun('isempty', data.time));
 end

@@ -6,8 +6,8 @@
   into a FieldTrip-type data structure
 
   Use as
-    data, event = read_iworx(folder)
-  where folder contains a data (.mat) and a marks (.txt) file
+    data, event = read_iworx(filename)
+  where filename has a .mat extension
 
   data has the following nested fields:
     .trial
@@ -24,21 +24,13 @@
 """
 
 
-import os
-import glob
 import scipy.io
 
-def read_iworx(folder):
+def read_iworx(filename):
 
     # check the input
-    matfile = glob.glob(os.path.join(folder, "*.mat"))[0]
-    hasmat = 0
-    if os.path.exists(matfile):
-        hasmat = 1
-    markfile = glob.glob(os.path.join(folder, "*.txt"))[0]
-    hasmark = 0
-    if os.path.exists(markfile):
-        hasmark = 1
+    if not filename.endswith('.mat'):
+        print('warning: this function requires a .mat file as input')
 
     # read the data
     class Data(object):
@@ -47,12 +39,11 @@ def read_iworx(folder):
             self.time = []
             self.label = []
     data = Data()
-    if hasmat:
-        mat = scipy.io.loadmat(matfile)
-        for t in range(mat["n"][0][0]):  # n is a variable contained by the mat file
-            data.trial.append(mat["b" + str(t + 1)].T)
-            data.time.append(mat["b" + str(t + 1)][:, 0])
-        data.label = ['Time', 'Corrugator supercilii muscle', 'Zygomaticus major muscle', 'Heart Rate', 'dunno', 'Skin Conductance']
+    mat = scipy.io.loadmat(filename)
+    for t in range(mat["n"][0][0]):  # n is a variable contained by the mat file
+        data.trial.append(mat["b" + str(t + 1)].T)
+        data.time.append(mat["b" + str(t + 1)][:, 0])
+    data.label = ['Time', 'Corrugator supercilii muscle', 'Zygomaticus major muscle', 'Heart Rate', 'dunno', 'Skin Conductance']
 
     # read the markers
     class Event(object):
@@ -61,13 +52,19 @@ def read_iworx(folder):
             self.sample = []
             self.value = []
     event = Event()
-    if hasmark:
-        with open(markfile) as f:
-            contents = f.readlines()
-        for e in range(1, len(contents)):
-            event.type.append(contents[e].split("	")[0])
-            event.sample.append(contents[e].split("	")[1])
-            event.value.append(contents[e].split("	")[4])
+    marks = [i for i in mat if i.startswith('m')]
+    if marks:
+        for e in marks:
+            event.type.append('trig')
+            event.sample.append(mat[e]['time'][0][0][0][0])
+            event.value.append(mat[e]['value'][0][0][0])
 
-    return data, event
+        # discard trials unlikely to match the events
+        for t in range(len(data.trial)):
+            if data.time[t][-1] < event.sample[-1]:
+                data.trial[t] = []
+                data.time[t] = []
+        data.trial = [t for t in data.trial if t != []]
+        data.time = [t for t in data.time if t != []]
     
+    return data, event
