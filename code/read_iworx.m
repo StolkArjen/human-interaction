@@ -1,12 +1,12 @@
-function [data, event] = read_iworx(filename)
+function [data, event] = read_iworx(folder)
 
 % READ_IWORX reads and converts various IWORX datafiles into a
 % FieldTrip-type data structure, which subsequently can be used for
 % preprocessing or other analysis methods implemented in Fieldtrip
 %
 % Use as
-%   [data, event] = read_iworx(filename)
-% where filename has a .mat extension
+%   [data, event] = read_iworx(folder)
+% where folder contains a data (.txt) and marks (.txt) file
 %
 % data has the following nested fields:
 %    .trial
@@ -22,42 +22,60 @@ function [data, event] = read_iworx(filename)
 
 
 % check the input
-[~, ~, ext] = fileparts(filename);
-if ~strcmp(ext, '.mat')
-  error('this function requires a .mat file as input')
-end
-
-% read the data
-load(filename);
-for t = 1:n % n is a variable contained by the mat file
-  data.trial{1,t} = eval(['b' num2str(t)])';
-  data.time{1,t} = eval(['b' num2str(t) '(:,1)'])';
-end
-data.label = {'Time'; ...
-  'Corrugator supercilii muscle'; ...
-  'Zygomaticus major muscle';	...
-  'Heart Rate';	...
-  'dunno'; ...
-  'Skin Conductance'}; % info stored in the .txt but not .mat file
-
-% read the markers
-event = [];
-marks = whos('m*');
-if ~isempty(marks)
-  for e = 1:numel(marks)
-    tmp = eval(marks(e).name);
-    event(end+1).type = 'trig';
-    event(end).sample = tmp.time;
-    event(end).value  = tmp.value;
+txtfiles = dir([folder filesep '*.txt']);
+for l = 1:numel(txtfiles)
+  if ~isempty(strfind(txtfiles(l).name, 'Marks'))
+    markfile = [folder filesep txtfiles(l).name];
+  else
+    datafile = [folder filesep txtfiles(l).name];
   end
+end
 
-  % discard trials unlikely to match the events
-  for t = 1:size(data.trial,2)
-    if data.time{1,t}(end) < event(end).sample
-      data.trial{1,t} = [];
-      data.time{1,t} = [];
+% read the marks file
+event = [];
+try
+  T = readtable(markfile, 'DurationType', 'text', 'VariableNamingRule', 'preserve');
+  for e = 1:size(T,1)
+    event(e).type = 'trig';
+    event(e).sample = sum(sscanf(T.("Real Time"){e},'%f:%f:%f').*[3600;60;1]); % hh:mm:ss
+    event(e).value  = T.("MarkValue"){e};
+  end
+catch
+  fprintf('a problem arose extracting the events\n')
+end
+
+% read the data file
+data = [];
+try
+  % header
+  fid = fopen(datafile,'r');
+  str = textscan(fid,'%s','Delimiter','\r');
+  str = str{1};
+  fclose(fid);
+  data.label = split(str{1}, '	');
+  idx = [];
+  for l = 1:numel(data.label) % discard time channels
+    if isempty(strfind(data.label{l}, 'Time'))
+      idx = [idx l];
     end
   end
-  data.trial = data.trial(~cellfun('isempty', data.trial));
-  data.time = data.time(~cellfun('isempty', data.time));
+  data.label = data.label(idx);
+
+  % data
+  T = readtable(datafile, 'DurationType', 'text', 'VariableNamingRule', 'preserve');
+  trl = 1;
+  data.trial{1,trl} = [];
+  data.time{1,trl}  = [];
+  for smp = 1:size(T,1)
+    if isequal(T.("TimeOfDay"){smp}, 'TimeOfDay')
+      trl = trl+1;
+      data.trial{1,trl} = [];
+      data.time{1,trl}  = [];
+    else
+      data.trial{1,trl} = [data.trial{1,trl} T{smp,idx}'];
+      data.time{1,trl}  = [data.time{1,trl} sum(sscanf(T.("TimeOfDay"){smp},'%f:%f:%f').*[3600;60;1])]; % hh:mm:ss
+    end
+  end
+catch
+  fprintf('a problem arose reading the data\n')
 end
