@@ -1,0 +1,41 @@
+[{
+    "epoch": "sender",
+    "trial": 20,
+    "player": "745338765.2894142",
+    "stage": {
+        "stage": 3,
+        "step": 3,
+        "round": 20
+    },
+    "timestamp": 1645118958429,
+    "session": "room000389"
+}, {
+    "time": 7255,
+    "timeup": true,
+    "role": "SENDER",
+    "partner": "745338765.2894142",
+    "done": true,
+    "player": "293668948.86271465",
+    "stage": {
+        "stage": 3,
+        "step": 3,
+        "round": 20
+    },
+    "timestamp": 1645118965661,
+    "session": "room000389"
+}, {
+    "sender end (says receiver)": true,
+    "time": 7248,
+    "timeup": true,
+    "role": "RECEIVER",
+    "partner": "293668948.86271465",
+    "done": true,
+    "player": "745338765.2894142",
+    "stage": {
+        "stage": 3,
+        "step": 3,
+        "round": 20
+    },
+    "timestamp": 1645118965676,
+    "session": "room000389"
+}]

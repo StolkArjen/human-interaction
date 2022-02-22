@@ -1,0 +1,105 @@
+[{
+    "epoch": "roleassignment",
+    "trial": 19,
+    "p1": {
+        "player": 1,
+        "time": 10000,
+        "color": [
+            49,
+            113,
+            166,
+            1
+        ],
+        "role": "receiver",
+        "shape": 2,
+        "xPos": -1,
+        "yPos": -1,
+        "angle": 0,
+        "state": "outside",
+        "goal": {
+            "shape": 2,
+            "xPos": -1,
+            "yPos": -1,
+            "angle": 0
+        },
+        "onTarget": 0,
+        "numTarget": 0,
+        "numMove": 0,
+        "control": [],
+        "timeout": []
+    },
+    "p2": {
+        "player": 2,
+        "time": 10000,
+        "color": [
+            223,
+            129,
+            51,
+            1
+        ],
+        "role": "sender",
+        "shape": 3,
+        "xPos": 1,
+        "yPos": 1,
+        "angle": 90,
+        "state": "outside",
+        "goal": {
+            "shape": 3,
+            "xPos": 1,
+            "yPos": 1,
+            "angle": 90
+        },
+        "onTarget": 0,
+        "numTarget": 0,
+        "numMove": 0,
+        "control": [],
+        "timeout": []
+    },
+    "player": "912557071.8902563",
+    "stage": {
+        "stage": 3,
+        "step": 1,
+        "round": 19
+    },
+    "timestamp": 1645115549630,
+    "session": "room000380"
+}, {
+    "Iamplayer": 1,
+    "date": "2022-02-17T16:32:29.805Z",
+    "player": "912557071.8902563",
+    "stage": {
+        "stage": 3,
+        "step": 1,
+        "round": 19
+    },
+    "timestamp": 1645115549810,
+    "session": "room000380"
+}, {
+    "time": 1501,
+    "timeup": true,
+    "role": "SENDER",
+    "partner": "912557071.8902563",
+    "done": true,
+    "player": "804552721.478098",
+    "stage": {
+        "stage": 3,
+        "step": 1,
+        "round": 19
+    },
+    "timestamp": 1645115551114,
+    "session": "room000380"
+}, {
+    "time": 1502,
+    "timeup": true,
+    "role": "RECEIVER",
+    "partner": "804552721.478098",
+    "done": true,
+    "player": "912557071.8902563",
+    "stage": {
+        "stage": 3,
+        "step": 1,
+        "round": 19
+    },
+    "timestamp": 1645115551315,
+    "session": "room000380"
+}]
