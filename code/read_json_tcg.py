@@ -104,12 +104,12 @@ def read_json_tcg(logfile):
 
             # epoch loop
             for eidx, e in enumerate(epoch):
-                filename = logfile + os.path.sep + s + \
-                    '_trial_' + str(t+1) + '_' + e + '.json'
-                if os.path.exists(filename):
+                filename = glob.glob(logfile + os.path.sep + s + \
+                    '_trial_' + str(t+1) + '_' + e + '*.json')
+                if filename:
 
                     # read in json structure
-                    with open(filename) as file:
+                    with open(filename[0]) as file:
                         val = json.load(file)
 
                         # trial onsets and roles
