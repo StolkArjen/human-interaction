@@ -16,7 +16,7 @@ function [data] = read_json_tcg(logfile)
 % event     onsets and durations of task events
 % token     token positions
 %
-% Arjen Stolk, 2021
+% Arjen Stolk, 2022
 % --------------------------------------------------------
 
 
@@ -78,11 +78,11 @@ for s = 1:numel(sess) % session loop
 
     % epoch loop
     for e = 1:numel(epoch)
-      filename = [logfile filesep sess{s} '_trial_' num2str(t) '_' epoch{e} '.json']; % '_bot.json'
-      if exist(filename, 'file')
+      filename = dir([logfile filesep sess{s} '_trial_' num2str(t) '_' epoch{e} '*.json']); % '_bot.json'
+      if ~isempty(filename)
 
         % read in json structure
-        val = jsondecode(fileread(filename));
+        val = jsondecode(fileread([logfile filesep filename.name]));
 
         % reshape structure into cell array if needed (e.g. roleassigment of game_trial_1)
         if isstruct(val)
