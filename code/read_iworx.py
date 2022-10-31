@@ -81,19 +81,20 @@ def read_iworx(folder):
             data.time.append([])
             tmp = []
             for smp in range(1, len(contents)):
-                if contents[smp].split('\t')[0] == 'TimeOfDay':
+                if contents[smp].split('\t')[0] == 'TimeOfDay': # mark a new datablock/trial
                     data.trial[trl] = np.transpose(np.vstack(np.array(tmp)))
                     trl += 1
                     data.trial.append([])
                     data.time.append([])
                     tmp = []
-                else:
+                else: # read the data line by line
                     tmp.append([float(x) for i, x in enumerate(
                         contents[smp].rstrip().split('\t')) if i in idx])
-                    h, m, s = contents[smp].split(
-                        "	")[contents[0].split('\t').index('TimeOfDay')].split(':')
-                    data.time[trl].append(
-                        float(h) * 3600 + float(m) * 60 + float(s))
+                    if contents[0].split('\t')[0] == 'TimeOfDay': # if possible, add time information from TimeOfDay timestamps
+                        h, m, s = contents[smp].split(
+                            "	")[contents[0].split('\t').index('TimeOfDay')].split(':')
+                        data.time[trl].append(
+                            float(h) * 3600 + float(m) * 60 + float(s))
             data.trial[trl] = np.transpose(np.vstack(np.array(tmp)))
     except:
         print('a problem arose reading the data')
