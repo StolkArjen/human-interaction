@@ -1,0 +1,117 @@
+[{
+    "epoch": "receiver",
+    "trial": 71,
+    "player": "63925058.31996798",
+    "stage": {
+        "stage": 3,
+        "step": 4,
+        "round": 71
+    },
+    "timestamp": 1705545610740,
+    "session": "room000956"
+}, {
+    "epoch": "receiver",
+    "trial": 71,
+    "player": "560100388.0121357",
+    "stage": {
+        "stage": 3,
+        "step": 4,
+        "round": 71
+    },
+    "timestamp": 1705545610803,
+    "session": "room000956"
+}, {
+    "token": {
+        "player": 2,
+        "time": 10000,
+        "color": [
+            223,
+            129,
+            51,
+            1
+        ],
+        "role": "receiver",
+        "shape": 3,
+        "xPos": 0,
+        "yPos": 0,
+        "angle": 0,
+        "state": "in-use",
+        "goal": {
+            "shape": 3,
+            "xPos": -1,
+            "yPos": -1,
+            "angle": 90
+        },
+        "onTarget": 0,
+        "numTarget": 0,
+        "numMove": 1,
+        "control": "keyboard",
+        "timeout": 10811
+    },
+    "action": "start",
+    "player": "63925058.31996798",
+    "stage": {
+        "stage": 3,
+        "step": 4,
+        "round": 71
+    },
+    "timestamp": 1705545622047,
+    "session": "room000956"
+}, {
+    "token": {
+        "player": 2,
+        "time": 10000,
+        "color": [
+            223,
+            129,
+            51,
+            1
+        ],
+        "role": "receiver",
+        "shape": 3,
+        "xPos": 0,
+        "yPos": 0,
+        "angle": 0,
+        "state": "locked",
+        "goal": {
+            "shape": 3,
+            "xPos": -1,
+            "yPos": -1,
+            "angle": 90
+        },
+        "onTarget": 0,
+        "numTarget": 0,
+        "numMove": 1,
+        "control": "keyboard",
+        "timeout": 10811
+    },
+    "action": "stop",
+    "time": 11451,
+    "timeup": true,
+    "role": "RECEIVER",
+    "partner": "560100388.0121357",
+    "done": true,
+    "player": "63925058.31996798",
+    "stage": {
+        "stage": 3,
+        "step": 4,
+        "round": 71
+    },
+    "timestamp": 1705545622196,
+    "session": "room000956"
+}, {
+    "receiver end (says sender)": true,
+    "time": 11459,
+    "timeup": true,
+    "role": "SENDER",
+    "partner": "63925058.31996798",
+    "done": true,
+    "player": "560100388.0121357",
+    "stage": {
+        "stage": 3,
+        "step": 4,
+        "round": 71
+    },
+    "timestamp": 1705545622239,
+    "session": "room000956"
+}]
