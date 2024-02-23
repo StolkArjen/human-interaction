@@ -17,7 +17,7 @@ label     variable names
 event     onsets and durations of task events
 token     token positions
 
-Arjen Stolk, February 2024
+Arjen Stolk, 2022
 --------------------------------------------------------
 """
 
@@ -41,7 +41,7 @@ class Data(object):
                       'TargetNum', 'TargetTime', 'NonTargetTime',
                       'ReceiverPlayer', 'ReceiverPlanTime', 'ReceiverMovTime', 'ReceiverNumMoves',
                       'Success', 'SenderLocSuccess', 'SenderOriSuccess', 'ReceiverLocSuccess', 'ReceiverOriSuccess',
-                      'Level', 'TrialOffset', 'Addressee']
+                      'Level', 'TrialOffset']
         self.event = []  # onset timestamps of the five epochs
         # coord [xPos, yPos, angle], time, shape, control, action, target [xPos, yPos, angle]
         self.token_sender = []
@@ -101,7 +101,6 @@ def read_json_tcg(logfile):
             SenderTarget = np.nan
             ReceiverTarget = np.nan
             Level = np.nan
-            Addressee = np.nan
 
             # epoch loop
             for eidx, e in enumerate(epoch):
@@ -114,8 +113,8 @@ def read_json_tcg(logfile):
                         val = json.load(file)
 
                         # trial onsets and roles
-                        if ('epoch' in val[0] and val[0]['epoch'] == 'roleassignment' and (s == 'training' or s == 'game')) or \
-                                ('epoch' in val[0] and val[0]['epoch'] == 'tokenassignment' and s == 'practice'):
+                        if (val[0]['epoch'] == 'roleassignment' and (s == 'training' or s == 'game')) or \
+                                (val[0]['epoch'] == 'tokenassignment' and s == 'practice'):
                             TrialOnset = val[0]['timestamp']
                             if 'p1' in val[0] or 'p2' in val[0]:
                                 if 'angle' in val[0]['p1']:  # tcg
@@ -175,7 +174,7 @@ def read_json_tcg(logfile):
                                             print('player 2 date not found')
 
                         # planning and movement times
-                        if 'epoch' in val[0] and val[0]['epoch'] == 'sender':
+                        if val[0]['epoch'] == 'sender':
                             for index, v in enumerate(val):
                                 # planning & movement time
                                 if 'action' in v:
@@ -236,13 +235,8 @@ def read_json_tcg(logfile):
                                     else:  # tcg kids
                                         data.token_sender[sidx][t].append([[v['token']['xPos'], v['token']['yPos']],
                                                                            v['timestamp'], v['token']['shape'], v['token']['control'], v['action'], SenderTarget])
-                                        if 'addressee' in v['token']:
-                                            if v['token']['addressee'] == 'child':
-                                                Addressee = 1 # confederate played the role of the child
-                                            elif v['token']['addressee'] == 'adult':
-                                                Addressee = 2 # confederate played the role of the adult
 
-                        elif 'epoch' in val[0] and val[0]['epoch'] == 'receiver':
+                        elif val[0]['epoch'] == 'receiver':
                             for index, v in enumerate(val):
                                 # planning & movement time
                                 if 'action' in v:
@@ -273,7 +267,7 @@ def read_json_tcg(logfile):
                                                                              v['timestamp'], v['token']['shape'], v['token']['control'], v['action'], ReceiverTarget])
 
                         # feedback, level and trial offset
-                        if 'epoch' in val[0] and val[0]['epoch'] == 'feedback':
+                        if val[0]['epoch'] == 'feedback':
                             Success = val[0]['success']
                             if 'p1' in val[0] and 'role' in val[0]['p1'] and val[0]['p1']['role'] == 'sender':
                                 SenderLocSuccess, SenderOriSuccess = check_feedback(
@@ -292,7 +286,7 @@ def read_json_tcg(logfile):
                             TrialOffset = val[0]['timestamp']+1000
 
                         # event timestamps
-                        if 'epoch' in val[0] and val[0]['epoch'] == e:
+                        if val[0]['epoch'] == e:
                             # register the first timestamp
                             data.event[sidx][t].append(val[0]['timestamp'])
 
@@ -300,16 +294,15 @@ def read_json_tcg(logfile):
             data.trial[sidx].append([t+1, sidx+1, np.nan, TrialOnset,
                                      SenderPlayer, SenderPlanTime, SenderMovTime, SenderNumMoves, TargetNum, TargetTime, NonTargetTime,
                                      ReceiverPlayer, ReceiverPlanTime, ReceiverMovTime, ReceiverNumMoves,
-                                     Success, SenderLocSuccess, SenderOriSuccess, ReceiverLocSuccess, ReceiverOriSuccess, Level, TrialOffset, Addressee])
+                                     Success, SenderLocSuccess, SenderOriSuccess, ReceiverLocSuccess, ReceiverOriSuccess, Level, TrialOffset])
     return data
 
 
 def check_feedback(p):
     loc, ori = 0, 0
     # location
-    if p['shape'] == 'bird':
-        if [p['xPos'], p['yPos']] == [0, 0]:
-            loc = 1
+    if p['shape'] == 'bird' and [p['xPos'], p['yPos']] == [0, 0]:
+        loc = 1
     elif p['shape'] == 'squirrel':
         loc = np.nan
     elif [p['xPos'], p['yPos']] == [p['goal']['xPos'], p['goal']['yPos']]:
