@@ -1,0 +1,7 @@
+[
+{"epoch":"receiver","trial":42,"player":"450260191.6927007","stage":{"stage":2,"step":3,"round":42},"timestamp":1708894586984,"session":"room000295","treatment":"bot"}, 
+{"argmax1":4,"argmax2":5,"player":"953225956.1665899","stage":{"stage":2,"step":3,"round":42},"timestamp":1708894586985,"session":"room000295","treatment":"bot"}, 
+{"token":{"player":2,"time":10000,"role":"receiver","shape":"squirrel","addressee":"adult","xPos":0.02636755862939718,"yPos":0.0235099848354004,"state":"in-use","goal":4,"onTarget":0,"numTarget":0,"numMove":0,"control":[],"timeout":[]},"action":"tracking","player":"953225956.1665899","stage":{"stage":2,"step":3,"round":42},"timestamp":1708894588047,"session":"room000295","treatment":"bot"}, 
+{"token":{"player":2,"time":10000,"role":"receiver","shape":"squirrel","addressee":"adult","xPos":1.2601757546719208,"yPos":0.9915178565139598,"state":"locked","goal":4,"onTarget":0,"numTarget":0,"numMove":0,"control":[],"timeout":[]},"action":"stop","time":4251,"timeup":false,"role":"RECEIVER","partner":"450260191.6927007","stepId":"receiver","stageId":"game","done":true,"player":"953225956.1665899","stage":{"stage":2,"step":3,"round":42},"timestamp":1708894591214,"session":"room000295","treatment":"bot"}, 
+{"receiver end (says sender)":true,"time":4253,"timeup":false,"role":"SENDER","partner":"953225956.1665899","stepId":"receiver","stageId":"game","done":true,"player":"450260191.6927007","stage":{"stage":2,"step":3,"round":42},"timestamp":1708894591233,"session":"room000295","treatment":"bot"}
+]
