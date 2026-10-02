@@ -17,7 +17,7 @@ label     variable names
 event     onsets and durations of task events
 token     token positions
 
-Arjen Stolk, February 2024
+Arjen Stolk, October 2024
 --------------------------------------------------------
 """
 
@@ -52,8 +52,7 @@ def read_json_tcg(logfile):
     # recording information
     data = Data()
     data.info[0] = logfile
-    data.info[1] = datetime.datetime.fromtimestamp(
-        os.stat(logfile).st_mtime).strftime('%Y-%m-%d-%H:%M')
+    data.info[1] = datetime.datetime.fromtimestamp(os.stat(logfile).st_mtime).strftime('%Y-%m-%d-%H:%M')
 
     # read all json files
     sess = ['practice', 'training', 'game']
@@ -158,19 +157,15 @@ def read_json_tcg(logfile):
                             for v in val:
                                 if 'Iamplayer' in v:
                                     if v['Iamplayer'] == 1:
-                                        data.info[2] = 'player 1: ' + \
-                                            v['player']
+                                        data.info[2] = 'player 1: ' + v['player']
                                         try:
-                                            data.info[4] = 'date 1: ' + \
-                                                v['date']
+                                            data.info[4] = 'date 1: ' + v['date']
                                         except:
                                             print('player 1 date not found')
                                     elif v['Iamplayer'] == 2:
-                                        data.info[3] = 'player 2: ' + \
-                                            v['player']
+                                        data.info[3] = 'player 2: ' + v['player']
                                         try:
-                                            data.info[5] = 'date 2: ' + \
-                                                v['date']
+                                            data.info[5] = 'date 2: ' + v['date']
                                         except:
                                             print('player 2 date not found')
 
@@ -194,40 +189,31 @@ def read_json_tcg(logfile):
                                         if not NonTargetTime:  # empty
                                             NonTargetTime = np.nan
                                         elif NonTargetTime:  # not empty
-                                            NonTargetTime = np.nanmean(
-                                                NonTargetTime)
+                                            NonTargetTime = np.nanmean(NonTargetTime)
                                     elif v['action'] == 'up' or v['action'] == 'down' or \
                                             v['action'] == 'left' or v['action'] == 'right' or \
                                             v['action'] == 'rotateleft' or v['action'] == 'rotateright':
                                         SenderNumMoves = SenderNumMoves + 1
-                                        # tcg kids
-                                        if SenderNumMoves == 1 and str(v['token']['shape']).isalpha():
+                                        if SenderNumMoves == 1 and str(v['token']['shape']).isalpha(): # first movement in tcg kids
                                             SenderMovOnset = v['timestamp']
-                                            SenderPlanTime = SenderMovOnset - \
-                                                val[0]['timestamp']  # 1st timestamp is goal onset
+                                            SenderPlanTime = SenderMovOnset - val[0]['timestamp']  # 1st timestamp is goal onset
                                             WaitForOffTarget = 0
-                                        # time spent at location
-                                        if WaitForOffTarget == 1:
-                                            TargetTime.append(
-                                                v['timestamp'] - val[index-1]['timestamp'])
-                                            WaitForOffTarget = 0
-                                        else:
-                                            NonTargetTime.append(
-                                                v['timestamp'] - val[index-1]['timestamp'])
+                                        else: # tcg or any secondary movement in tcg kids
+                                            if WaitForOffTarget == 1:
+                                                TargetTime.append(v['timestamp'] - val[index-1]['timestamp'])
+                                                WaitForOffTarget = 0
+                                            else:
+                                                NonTargetTime.append(v['timestamp'] - val[index-1]['timestamp'])
                                         # on target
-                                        # tcg
-                                        if str(v['token']['shape']).isnumeric() and [v['token']['xPos'], v['token']['yPos']] == ReceiverTargetPos:
+                                        if str(v['token']['shape']).isnumeric() and [v['token']['xPos'], v['token']['yPos']] == ReceiverTargetPos: # tcg
                                             TargetNum = TargetNum + 1
                                             WaitForOffTarget = 1
-                                        # tcg kids
-                                        elif str(v['token']['shape']).isalpha() and check_target(v['token']):
+                                        elif str(v['token']['shape']).isalpha() and check_target(v['token']): # tcg kids
                                             TargetNum = TargetNum + 1
                                             WaitForOffTarget = 1
                                         # double check on target
-                                        # overlooked targets
-                                        if s != 'practice' and v['token']['onTarget'] and TargetNum == 0:
-                                            print(
-                                                'WARNING: on target missed for ' + logfile + ', ' + s + ', trial ' + str(t))
+                                        if s != 'practice' and v['token']['onTarget'] and TargetNum == 0: # overlooked target visits
+                                            print('WARNING: on target missed for ' + logfile + ', ' + s + ', trial ' + str(t))
                                 # token coord & timestamps
                                 if 'token' in v:
                                     if 'angle' in v['token']:  # tcg
@@ -248,8 +234,7 @@ def read_json_tcg(logfile):
                                 if 'action' in v:
                                     if v['action'] == 'start':
                                         ReceiverMovOnset = v['timestamp']
-                                        ReceiverPlanTime = ReceiverMovOnset - \
-                                            val[0]['timestamp']  # 1st timestamp is goal onset
+                                        ReceiverPlanTime = ReceiverMovOnset - val[0]['timestamp']  # 1st timestamp is goal onset
                                     elif v['action'] == 'stop' or v['action'] == 'timeout':
                                         ReceiverMovOffset = v['timestamp']
                                         ReceiverMovTime = ReceiverMovOffset - ReceiverMovOnset
@@ -258,11 +243,9 @@ def read_json_tcg(logfile):
                                             v['action'] == 'rotateleft' or v['action'] == 'rotateright' or \
                                             v['action'] == 'tracking':
                                         ReceiverNumMoves = ReceiverNumMoves + 1
-                                        # tcg kids
-                                        if ReceiverNumMoves == 1 and str(v['token']['shape']).isalpha():
+                                        if ReceiverNumMoves == 1 and str(v['token']['shape']).isalpha(): # tcg kids
                                             ReceiverMovOnset = v['timestamp']
-                                            ReceiverPlanTime = ReceiverMovOnset - \
-                                                val[0]['timestamp']  # 1st timestamp is goal onset
+                                            ReceiverPlanTime = ReceiverMovOnset - val[0]['timestamp']  # 1st timestamp is goal onset
                                 # token coord & timestamps
                                 if 'token' in v:
                                     if 'angle' in v['token']:  # tcg
@@ -276,17 +259,13 @@ def read_json_tcg(logfile):
                         if 'epoch' in val[0] and val[0]['epoch'] == 'feedback':
                             Success = val[0]['success']
                             if 'p1' in val[0] and 'role' in val[0]['p1'] and val[0]['p1']['role'] == 'sender':
-                                SenderLocSuccess, SenderOriSuccess = check_feedback(
-                                    val[0]['p1'])
+                                SenderLocSuccess, SenderOriSuccess = check_feedback(val[0]['p1'])
                             elif 'p2' in val[0] and 'role' in val[0]['p2'] and val[0]['p2']['role'] == 'sender':
-                                SenderLocSuccess, SenderOriSuccess = check_feedback(
-                                    val[0]['p2'])
+                                SenderLocSuccess, SenderOriSuccess = check_feedback(val[0]['p2'])
                             if 'p1' in val[0] and 'role' in val[0]['p1'] and val[0]['p1']['role'] == 'receiver':
-                                ReceiverLocSuccess, ReceiverOriSuccess = check_feedback(
-                                    val[0]['p1'])
+                                ReceiverLocSuccess, ReceiverOriSuccess = check_feedback(val[0]['p1'])
                             elif 'p2' in val[0] and 'role' in val[0]['p2'] and val[0]['p2']['role'] == 'receiver':
-                                ReceiverLocSuccess, ReceiverOriSuccess = check_feedback(
-                                    val[0]['p2'])
+                                ReceiverLocSuccess, ReceiverOriSuccess = check_feedback(val[0]['p2'])
                             if 'level' in val[0]:
                                 Level = val[0]['level']
                             TrialOffset = val[0]['timestamp']+1000

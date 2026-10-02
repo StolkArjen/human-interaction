@@ -16,7 +16,7 @@ function [data] = read_json_tcg(logfile)
 % event     onsets and durations of task events
 % token     token positions
 %
-% Arjen Stolk, 2022
+% Arjen Stolk, October 2024
 % --------------------------------------------------------
 
 
@@ -47,6 +47,7 @@ for s = 1:numel(sess) % session loop
     SenderPlayer                      = NaN;
     ReceiverPlayer                    = NaN;
     SenderPlanTime                    = NaN;
+    SenderMovOnset                    = NaN;
     SenderMovTime                     = NaN;
     SenderNumMoves                    = 0;
     ReceiverPlanTime                  = NaN;
@@ -64,6 +65,7 @@ for s = 1:numel(sess) % session loop
     SenderTarget                      = NaN;
     ReceiverTarget                    = NaN;
     Level                             = NaN;
+    Addressee                         = NaN;
     data.token{s}.sender(t).coord     = [];
     data.token{s}.sender(t).time      = [];
     data.token{s}.sender(t).shape     = [];
@@ -93,49 +95,56 @@ for s = 1:numel(sess) % session loop
           end
         end
 
+        % check epoch type
+        hasroleassignment = any(cellfun(@(x) isfield(x, 'epoch') && strcmp(x.epoch, 'roleassignment'), val));
+        hastokenassignment = any(cellfun(@(x) isfield(x, 'epoch') && strcmp(x.epoch, 'tokenassignment'), val));
+        hassender = any(cellfun(@(x) isfield(x, 'epoch') && strcmp(x.epoch, 'sender'), val));
+        hasreceiver = any(cellfun(@(x) isfield(x, 'epoch') && strcmp(x.epoch, 'receiver'), val));
+        hasfeedback = any(cellfun(@(x) isfield(x, 'epoch') && strcmp(x.epoch, 'feedback'), val));
+
         % trial onsets and roles
-        if (strcmp(val{1}.epoch, 'roleassignment') && (strcmp(sess{s}, 'training') || strcmp(sess{s}, 'game'))) || ...
-            (strcmp(val{1}.epoch, 'tokenassignment') && strcmp(sess{s}, 'practice'))
-          TrialOnset = val{1}.timestamp;
-          if isfield(val{1}, 'p1') || isfield(val{1}, 'p2')
-            if isfield(val{1}.p1, 'angle') % tcg
-              if isfield(val{1}, 'p1') && isfield(val{1}.p1, 'role') && strcmp(val{1}.p1.role, 'sender')
-                SenderPlayer = 1;
-                SenderTarget = [val{1}.p1.goal.xPos val{1}.p1.goal.yPos val{1}.p1.goal.angle];
-              elseif isfield(val{1}, 'p2') && isfield(val{1}.p2, 'role') && strcmp(val{1}.p2.role, 'sender')
-                SenderPlayer = 2;
-                SenderTarget = [val{1}.p2.goal.xPos val{1}.p2.goal.yPos val{1}.p2.goal.angle];
-              end
-              if isfield(val{1}, 'p1') && isfield(val{1}.p1, 'role') && strcmp(val{1}.p1.role, 'receiver')
-                ReceiverPlayer = 1;
-                ReceiverTarget = [val{1}.p1.goal.xPos val{1}.p1.goal.yPos val{1}.p1.goal.angle];
-                ReceiverTargetPos = [val{1}.p1.goal.xPos val{1}.p1.goal.yPos];
-              elseif isfield(val{1}, 'p2') && isfield(val{1}.p2, 'role') && strcmp(val{1}.p2.role, 'receiver')
-                ReceiverPlayer = 2;
-                ReceiverTarget = [val{1}.p2.goal.xPos val{1}.p2.goal.yPos val{1}.p2.goal.angle];
-                ReceiverTargetPos = [val{1}.p2.goal.xPos val{1}.p2.goal.yPos];
-              end
-            else % tcg kids
-              if isfield(val{1}, 'p1') && isfield(val{1}.p1, 'role') && strcmp(val{1}.p1.role, 'sender')
-                SenderPlayer = 1;
-                SenderTarget = [0 0];
-              elseif isfield(val{1}, 'p2') && isfield(val{1}.p2, 'role') && strcmp(val{1}.p2.role, 'sender')
-                SenderPlayer = 2;
-                SenderTarget = [0 0];
-              end
-              if isfield(val{1}, 'p1') && isfield(val{1}.p1, 'role') && strcmp(val{1}.p1.role, 'receiver')
-                ReceiverPlayer = 1;
-                ReceiverTarget = [val{1}.p1.goal];
-                ReceiverTargetPos = [val{1}.p1.goal];
-              elseif isfield(val{1}, 'p2') && isfield(val{1}.p2, 'role') && strcmp(val{1}.p2.role, 'receiver')
-                ReceiverPlayer = 2;
-                ReceiverTarget = [val{1}.p2.goal];
-                ReceiverTargetPos = [val{1}.p2.goal];
+        if (hasroleassignment && (strcmp(sess{s}, 'training') || strcmp(sess{s}, 'game'))) || ...
+            (hastokenassignment && strcmp(sess{s}, 'practice'))
+          for c = 1:numel(val) % cells for this epoch
+            TrialOnset = val{1}.timestamp;
+            if isfield(val{c}, 'p1') || isfield(val{c}, 'p2')
+              if isfield(val{c}.p1, 'angle') % tcg
+                if isfield(val{c}, 'p1') && isfield(val{c}.p1, 'role') && strcmp(val{c}.p1.role, 'sender')
+                  SenderPlayer = 1;
+                  SenderTarget = [val{c}.p1.goal.xPos val{c}.p1.goal.yPos val{c}.p1.goal.angle];
+                elseif isfield(val{c}, 'p2') && isfield(val{c}.p2, 'role') && strcmp(val{c}.p2.role, 'sender')
+                  SenderPlayer = 2;
+                  SenderTarget = [val{c}.p2.goal.xPos val{c}.p2.goal.yPos val{c}.p2.goal.angle];
+                end
+                if isfield(val{c}, 'p1') && isfield(val{c}.p1, 'role') && strcmp(val{c}.p1.role, 'receiver')
+                  ReceiverPlayer = 1;
+                  ReceiverTarget = [val{c}.p1.goal.xPos val{c}.p1.goal.yPos val{c}.p1.goal.angle];
+                  ReceiverTargetPos = [val{c}.p1.goal.xPos val{c}.p1.goal.yPos];
+                elseif isfield(val{c}, 'p2') && isfield(val{c}.p2, 'role') && strcmp(val{c}.p2.role, 'receiver')
+                  ReceiverPlayer = 2;
+                  ReceiverTarget = [val{c}.p2.goal.xPos val{c}.p2.goal.yPos val{c}.p2.goal.angle];
+                  ReceiverTargetPos = [val{c}.p2.goal.xPos val{c}.p2.goal.yPos];
+                end
+              else % tcg kids
+                if isfield(val{c}, 'p1') && isfield(val{c}.p1, 'role') && strcmp(val{c}.p1.role, 'sender')
+                  SenderPlayer = 1;
+                  SenderTarget = [0 0];
+                elseif isfield(val{c}, 'p2') && isfield(val{c}.p2, 'role') && strcmp(val{c}.p2.role, 'sender')
+                  SenderPlayer = 2;
+                  SenderTarget = [0 0];
+                end
+                if isfield(val{c}, 'p1') && isfield(val{c}.p1, 'role') && strcmp(val{c}.p1.role, 'receiver')
+                  ReceiverPlayer = 1;
+                  ReceiverTarget = [val{c}.p1.goal];
+                  ReceiverTargetPos = [val{c}.p1.goal];
+                elseif isfield(val{c}, 'p2') && isfield(val{c}.p2, 'role') && strcmp(val{c}.p2.role, 'receiver')
+                  ReceiverPlayer = 2;
+                  ReceiverTarget = [val{c}.p2.goal];
+                  ReceiverTargetPos = [val{c}.p2.goal];
+                end
               end
             end
-          end
-          % player IDs (for relating to userinput)
-          for c = 1:numel(val) % cells for this epoch
+            % player IDs (for relating to userinput)
             if isfield(val{c}, 'Iamplayer')
               if isequal(val{c}.Iamplayer, 1)
                 data.info{3}{1} = ['player 1: ' val{c}.player];
@@ -149,7 +158,7 @@ for s = 1:numel(sess) % session loop
         end
 
         % planning and movement times
-        if strcmp(val{1}.epoch, 'sender')
+        if hassender
           for c = 1:numel(val) % cells for this epoch
             % planning & movement time
             if isfield(val{c}, 'action')
@@ -166,17 +175,17 @@ for s = 1:numel(sess) % session loop
                   strcmp(val{c}.action, 'left') || strcmp(val{c}.action, 'right') || ...
                   strcmp(val{c}.action, 'rotateleft') || strcmp(val{c}.action, 'rotateright')
                 SenderNumMoves = SenderNumMoves +1;
-                if isequal(SenderNumMoves,1) && ischar(val{c}.token.shape) % tcg kids
+                if isequal(SenderNumMoves,1) && ischar(val{c}.token.shape) % first movement in tcg kids
                   SenderMovOnset  = val{c}.timestamp;
                   SenderPlanTime  = SenderMovOnset - val{1}.timestamp; % 1st timestamp is goal onset
                   WaitForOffTarget = 0;
-                end
-                % time spent at location
-                if WaitForOffTarget
-                  TargetTime(end+1) = val{c}.timestamp-val{c-1}.timestamp;
-                  WaitForOffTarget = 0;
-                else
-                  NonTargetTime(end+1) = val{c}.timestamp-val{c-1}.timestamp;
+                else % tcg or any secondary movement in tcg kids
+                  if WaitForOffTarget
+                    TargetTime(end+1) = val{c}.timestamp-val{c-1}.timestamp;
+                    WaitForOffTarget = 0;
+                  else
+                    NonTargetTime(end+1) = val{c}.timestamp-val{c-1}.timestamp;
+                  end
                 end
                 % on target
                 if isnumeric(val{c}.token.shape) && isequal([val{c}.token.xPos val{c}.token.yPos], ReceiverTargetPos) % tcg
@@ -205,9 +214,16 @@ for s = 1:numel(sess) % session loop
               data.token{s}.sender(t).control{end+1,1} = val{c}.token.control;
               data.token{s}.sender(t).action{end+1,1}  = val{c}.action;
               data.token{s}.sender(t).goal             = SenderTarget;
+              if isfield(val{c}.token, 'addressee')
+                if strcmp(val{c}.token.addressee, 'child')
+                  Addressee = 1; % participant played with the child/black guy
+                else
+                  Addressee = 2; % participant played with the adult/white guy
+                end
+              end
             end
           end
-        elseif strcmp(val{1}.epoch, 'receiver')
+        elseif hasreceiver
           for c = 1:numel(val) % cells for this epoch
             % planning & movement time
             if isfield(val{c}, 'action')
@@ -246,26 +262,30 @@ for s = 1:numel(sess) % session loop
         end
 
         % feedback, level and trial offset
-        if strcmp(val{1}.epoch, 'feedback')
-          Success = val{1}.success;
-          if isfield(val{1}, 'p1') && isfield(val{1}.p1, 'role') && strcmp(val{1}.p1.role, 'sender')
-            [SenderLocSuccess, SenderOriSuccess] = check_feedback(val{1}.p1);
-          elseif isfield(val{1}, 'p2') && isfield(val{1}.p2, 'role') && strcmp(val{1}.p2.role, 'sender')
-            [SenderLocSuccess, SenderOriSuccess] = check_feedback(val{1}.p2);
+        if hasfeedback
+          for c = 1:numel(val) % cells for this epoch
+            if isfield(val{c}, 'success')
+              Success = val{c}.success;
+            end
+            if isfield(val{c}, 'p1') && isfield(val{c}.p1, 'role') && strcmp(val{c}.p1.role, 'sender')
+              [SenderLocSuccess, SenderOriSuccess] = check_feedback(val{c}.p1);
+            elseif isfield(val{c}, 'p2') && isfield(val{c}.p2, 'role') && strcmp(val{c}.p2.role, 'sender')
+              [SenderLocSuccess, SenderOriSuccess] = check_feedback(val{c}.p2);
+            end
+            if isfield(val{c}, 'p1') && isfield(val{c}.p1, 'role') && strcmp(val{c}.p1.role, 'receiver')
+              [ReceiverLocSuccess, ReceiverOriSuccess] = check_feedback(val{c}.p1);
+            elseif isfield(val{c}, 'p2') && isfield(val{c}.p2, 'role') && strcmp(val{c}.p2.role, 'receiver')
+              [ReceiverLocSuccess, ReceiverOriSuccess] = check_feedback(val{c}.p2);
+            end
+            if isfield(val{c}, 'level')
+              Level = val{c}.level;
+            end
+            TrialOffset = val{c}.timestamp+1000;
           end
-          if isfield(val{1}, 'p1') && isfield(val{1}.p1, 'role') && strcmp(val{1}.p1.role, 'receiver')
-            [ReceiverLocSuccess, ReceiverOriSuccess] = check_feedback(val{1}.p1);
-          elseif isfield(val{1}, 'p2') && isfield(val{1}.p2, 'role') && strcmp(val{1}.p2.role, 'receiver')
-            [ReceiverLocSuccess, ReceiverOriSuccess] = check_feedback(val{1}.p2);
-          end
-          if isfield(val{1}, 'level')
-            Level = val{1}.level;
-          end
-          TrialOffset = val{1}.timestamp+1000;
         end
 
         % event timestamps
-        if strcmp(val{1}.epoch, epoch{e})
+        if any(cellfun(@(x) isfield(x, 'epoch') && strcmp(x.epoch, epoch{e}), val))
           data.event{s}(t).epoch(end+1) = val{1}.timestamp; % register the first timestamp
         end
 
@@ -276,7 +296,7 @@ for s = 1:numel(sess) % session loop
       SenderPlayer SenderPlanTime SenderMovTime SenderNumMoves TargetNum TargetTime NonTargetTime ...
       ReceiverPlayer ReceiverPlanTime ReceiverMovTime ReceiverNumMoves ...
       Success SenderLocSuccess SenderOriSuccess ReceiverLocSuccess ReceiverOriSuccess Level ...
-      TrialOffset];
+      TrialOffset Addressee];
   end % trial
 end % session
 
@@ -285,7 +305,7 @@ data.label = {'TrialNr','TrialType','TrialTypeNr','TrialOnset', ...
   'SenderPlayer','SenderPlanTime','SenderMovTime','SenderNumMoves','TargetNum','TargetTime','NonTargetTime', ...
   'ReceiverPlayer','ReceiverPlanTime','ReceiverMovTime','ReceiverNumMoves', ...
   'Success','SenderLocSuccess','SenderOriSuccess','ReceiverLocSuccess','ReceiverOriSuccess','Level', ...
-  'TrialOffset'};
+  'TrialOffset','Addressee'};
 
 % add userinput field
 try
@@ -296,8 +316,10 @@ end
 function [loc, ori] = check_feedback(p)
 % location
 loc = 0;
-if isequal(p.shape, 'bird') && isequal([p.xPos p.yPos], [0, 0])
-  loc = 1;
+if isequal(p.shape, 'bird')
+  if isequal([p.xPos p.yPos], [0, 0])
+    loc = 1;
+  end
 elseif isequal(p.shape, 'squirrel')
   loc = NaN;
 elseif isequal([p.xPos p.yPos], [p.goal.xPos p.goal.yPos])

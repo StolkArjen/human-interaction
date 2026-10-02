@@ -1,0 +1,191 @@
+[{
+    "epoch": "receiver",
+    "trial": 35,
+    "player": "787896412.0114326",
+    "stage": {
+        "stage": 3,
+        "step": 4,
+        "round": 35
+    },
+    "timestamp": 1790900000150,
+    "session": "room001411"
+}, {
+    "epoch": "receiver",
+    "trial": 35,
+    "player": "865949219.5808074",
+    "stage": {
+        "stage": 3,
+        "step": 4,
+        "round": 35
+    },
+    "timestamp": 1790900000155,
+    "session": "room001411"
+}, {
+    "token": {
+        "player": 2,
+        "time": 10000,
+        "color": [
+            223,
+            129,
+            51,
+            1
+        ],
+        "role": "receiver",
+        "shape": 3,
+        "xPos": 0,
+        "yPos": 0,
+        "angle": 0,
+        "state": "in-use",
+        "goal": {
+            "shape": 3,
+            "xPos": 0,
+            "yPos": -1,
+            "angle": 270
+        },
+        "onTarget": 0,
+        "numTarget": 0,
+        "numMove": 1,
+        "control": "keyboard",
+        "timeout": 5412
+    },
+    "action": "start",
+    "player": "787896412.0114326",
+    "stage": {
+        "stage": 3,
+        "step": 4,
+        "round": 35
+    },
+    "timestamp": 1790900002449,
+    "session": "room001411"
+}, {
+    "token": {
+        "player": 2,
+        "time": 10000,
+        "color": [
+            223,
+            129,
+            51,
+            1
+        ],
+        "role": "receiver",
+        "shape": 3,
+        "xPos": 0,
+        "yPos": -1,
+        "angle": 0,
+        "state": "in-use",
+        "goal": {
+            "shape": 3,
+            "xPos": 0,
+            "yPos": -1,
+            "angle": 270
+        },
+        "onTarget": 0,
+        "numTarget": 0,
+        "numMove": 2,
+        "control": "keyboard",
+        "timeout": 5412
+    },
+    "action": "down",
+    "player": "787896412.0114326",
+    "stage": {
+        "stage": 3,
+        "step": 4,
+        "round": 35
+    },
+    "timestamp": 1790900003071,
+    "session": "room001411"
+}, {
+    "token": {
+        "player": 2,
+        "time": 10000,
+        "color": [
+            223,
+            129,
+            51,
+            1
+        ],
+        "role": "receiver",
+        "shape": 3,
+        "xPos": 0,
+        "yPos": -1,
+        "angle": 90,
+        "state": "in-use",
+        "goal": {
+            "shape": 3,
+            "xPos": 0,
+            "yPos": -1,
+            "angle": 270
+        },
+        "onTarget": 0,
+        "numTarget": 0,
+        "numMove": 3,
+        "control": "keyboard",
+        "timeout": 5412
+    },
+    "action": "rotateright",
+    "player": "787896412.0114326",
+    "stage": {
+        "stage": 3,
+        "step": 4,
+        "round": 35
+    },
+    "timestamp": 1790900004072,
+    "session": "room001411"
+}, {
+    "token": {
+        "player": 2,
+        "time": 10000,
+        "color": [
+            223,
+            129,
+            51,
+            1
+        ],
+        "role": "receiver",
+        "shape": 3,
+        "xPos": 0,
+        "yPos": -1,
+        "angle": 90,
+        "state": "locked",
+        "goal": {
+            "shape": 3,
+            "xPos": 0,
+            "yPos": -1,
+            "angle": 270
+        },
+        "onTarget": 0,
+        "numTarget": 0,
+        "numMove": 3,
+        "control": "keyboard",
+        "timeout": 5412
+    },
+    "action": "stop",
+    "time": 4276,
+    "timeup": true,
+    "role": "RECEIVER",
+    "partner": "865949219.5808074",
+    "done": true,
+    "player": "787896412.0114326",
+    "stage": {
+        "stage": 3,
+        "step": 4,
+        "round": 35
+    },
+    "timestamp": 1790900004428,
+    "session": "room001411"
+}, {
+    "receiver end (says sender)": true,
+    "time": 4323,
+    "timeup": true,
+    "role": "SENDER",
+    "partner": "787896412.0114326",
+    "done": true,
+    "player": "865949219.5808074",
+    "stage": {
+        "stage": 3,
+        "step": 4,
+        "round": 35
+    },
+    "timestamp": 1790900004478,
+    "session": "room001411"
+}]
