@@ -1,0 +1,195 @@
+[{
+    "epoch": "receiver",
+    "trial": 24,
+    "player": "689516211.7040914",
+    "stage": {
+        "stage": 3,
+        "step": 4,
+        "round": 24
+    },
+    "timestamp": 1790914612274,
+    "session": "room001434"
+}, {
+    "epoch": "receiver",
+    "trial": 24,
+    "player": "728510427.7256695",
+    "stage": {
+        "stage": 3,
+        "step": 4,
+        "round": 24
+    },
+    "timestamp": 1790914612285,
+    "session": "room001434"
+}, {
+    "token": {
+        "player": 1,
+        "time": 10000,
+        "color": [
+            49,
+            113,
+            166,
+            1
+        ],
+        "role": "receiver",
+        "shape": 2,
+        "xPos": 0,
+        "yPos": 0,
+        "angle": 0,
+        "state": "in-use",
+        "goal": {
+            "shape": 2,
+            "xPos": -1,
+            "yPos": 1,
+            "angle": 0
+        },
+        "onTarget": 0,
+        "numTarget": 0,
+        "numMove": 1,
+        "control": "touch",
+        "timeout": 3958,
+        "hold": 3870
+    },
+    "action": "start",
+    "player": "689516211.7040914",
+    "stage": {
+        "stage": 3,
+        "step": 4,
+        "round": 24
+    },
+    "timestamp": 1790914612878,
+    "session": "room001434"
+}, {
+    "token": {
+        "player": 1,
+        "time": 10000,
+        "color": [
+            49,
+            113,
+            166,
+            1
+        ],
+        "role": "receiver",
+        "shape": 2,
+        "xPos": 0,
+        "yPos": 1,
+        "angle": 0,
+        "state": "in-use",
+        "goal": {
+            "shape": 2,
+            "xPos": -1,
+            "yPos": 1,
+            "angle": 0
+        },
+        "onTarget": 0,
+        "numTarget": 0,
+        "numMove": 2,
+        "control": "touch",
+        "timeout": 3958,
+        "hold": 3870
+    },
+    "action": "up",
+    "player": "689516211.7040914",
+    "stage": {
+        "stage": 3,
+        "step": 4,
+        "round": 24
+    },
+    "timestamp": 1790914613373,
+    "session": "room001434"
+}, {
+    "token": {
+        "player": 1,
+        "time": 10000,
+        "color": [
+            49,
+            113,
+            166,
+            1
+        ],
+        "role": "receiver",
+        "shape": 2,
+        "xPos": -1,
+        "yPos": 1,
+        "angle": 0,
+        "state": "in-use",
+        "goal": {
+            "shape": 2,
+            "xPos": -1,
+            "yPos": 1,
+            "angle": 0
+        },
+        "onTarget": 0,
+        "numTarget": 0,
+        "numMove": 3,
+        "control": "touch",
+        "timeout": 3958,
+        "hold": 3870
+    },
+    "action": "left",
+    "player": "689516211.7040914",
+    "stage": {
+        "stage": 3,
+        "step": 4,
+        "round": 24
+    },
+    "timestamp": 1790914613615,
+    "session": "room001434"
+}, {
+    "token": {
+        "player": 1,
+        "time": 10000,
+        "color": [
+            49,
+            113,
+            166,
+            1
+        ],
+        "role": "receiver",
+        "shape": 2,
+        "xPos": -1,
+        "yPos": 1,
+        "angle": 0,
+        "state": "locked",
+        "goal": {
+            "shape": 2,
+            "xPos": -1,
+            "yPos": 1,
+            "angle": 0
+        },
+        "onTarget": 0,
+        "numTarget": 0,
+        "numMove": 3,
+        "control": "touch",
+        "timeout": 3958,
+        "hold": 3965
+    },
+    "action": "stop",
+    "time": 2644,
+    "timeup": true,
+    "role": "RECEIVER",
+    "partner": "728510427.7256695",
+    "done": true,
+    "player": "689516211.7040914",
+    "stage": {
+        "stage": 3,
+        "step": 4,
+        "round": 24
+    },
+    "timestamp": 1790914614926,
+    "session": "room001434"
+}, {
+    "receiver end (says sender)": true,
+    "time": 2720,
+    "timeup": true,
+    "role": "SENDER",
+    "partner": "689516211.7040914",
+    "done": true,
+    "player": "728510427.7256695",
+    "stage": {
+        "stage": 3,
+        "step": 4,
+        "round": 24
+    },
+    "timestamp": 1790914615010,
+    "session": "room001434"
+}]
